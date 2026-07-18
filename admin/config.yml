@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+publish_mode: simple
+media_folder: site/images/uploads
+public_folder: /images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: content/posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{category}}"
+    sortable_fields: [date, title, category]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Publish date, name: date, widget: datetime, format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: Short description, name: description, widget: text, hint: "Used on the homepage and in search results." }
+      - { label: Cover image, name: image, widget: image, required: true }
+      - label: Category
+        name: category
+        widget: select
+        options: [Tech, Projects, AI, Creator, Tutorials, Reviews]
+      - { label: Featured, name: featured, widget: boolean, default: false, hint: "The newest featured post becomes the large homepage project." }
+      - { label: Reading time, name: reading_time, widget: string, default: "6 min" }
+      - { label: Article, name: body, widget: markdown }
