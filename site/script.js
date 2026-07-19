@@ -32,15 +32,10 @@ if (!localStorage.getItem("ren_cookie_choice")) {
   const notice = document.createElement("aside");
   notice.className = "cookie-notice";
   notice.setAttribute("aria-label", "Cookie choices");
-  notice.innerHTML = `<div><strong>Your privacy matters.</strong><p>This preview currently uses only essential local storage to remember this choice. Advertising cookies must remain disabled until a certified consent platform and AdSense are configured.</p><a href="cookies.html">Read cookie policy</a></div><div class="cookie-actions"><button data-choice="essential">Essential only</button><button data-choice="all">Accept all</button></div>`;
+  notice.innerHTML = `<div><strong>Your privacy matters.</strong><p>REN Studio currently uses only essential local storage to remember this choice. Advertising cookies remain disabled until a certified consent platform and AdSense are configured.</p><a href="cookies.html">Read cookie policy</a></div><div class="cookie-actions"><button data-choice="essential">Essential only</button><button data-choice="all">Accept all</button></div>`;
   document.body.appendChild(notice);
   notice.querySelectorAll("button").forEach(button => button.addEventListener("click", () => {
     localStorage.setItem("ren_cookie_choice", button.dataset.choice);
     notice.remove();
   }));
 }
-
-document.querySelector(".contact-form")?.addEventListener("submit", event => {
-  event.preventDefault();
-  document.querySelector(".contact-message").textContent = "Preview only: connect this form to your real email service before publishing.";
-});

@@ -1,6 +1,49 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contact — REN Studio</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="legal.css"><script src="script.js" defer></script></head><body><header><a class="brand" href="index.html"><strong>REN</strong><span>STUDIO</span></a><nav class="desktop-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></nav></header>
-<main class="legal-page"><p class="label">Contact</p><h1>Talk to the studio.</h1><p class="intro">Use this page for corrections, questions, collaboration enquiries and privacy requests.</p>
-<section class="policy-section"><div class="policy-callout"><p>This form is a preview and does not send or store messages yet. Connect it to a real inbox or secure form service before publishing the site or applying for AdSense.</p></div></section>
-<section class="policy-section"><h2>Send a message</h2><form class="contact-form"><label>Name<input name="name" autocomplete="name" required></label><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Subject<input name="subject" required></label><label>Message<textarea name="message" required></textarea></label><button type="submit">Send message</button><p class="contact-message" aria-live="polite"></p></form></section>
-<section class="policy-section"><h2>Before launch</h2><p>Add the site owner or business name, a monitored contact email, and—where legally required—a mailing or registered address. Do not publish invented contact information.</p></section></main>
-<footer><div><a class="brand" href="index.html"><strong>REN</strong><span>STUDIO</span></a></div><nav class="legal-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="disclaimer.html">Disclaimer</a></nav><p>© <span data-year></span> REN Studio</p></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Contact REN Studio">
+  <title>Contact — REN Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="legal.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html"><strong>REN</strong><span>STUDIO</span></a>
+    <nav class="desktop-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></nav>
+  </header>
+  <main class="legal-page">
+    <p class="label">Contact</p>
+    <h1>Talk to the studio.</h1>
+    <p class="intro">Use this form for questions, corrections, collaboration enquiries, business enquiries and privacy requests.</p>
+    <section class="policy-section">
+      <div class="policy-callout"><p>Messages are securely processed by Netlify Forms and used only to review and respond to your request.</p></div>
+    </section>
+    <section class="policy-section">
+      <h2>Send a message</h2>
+      <form class="contact-form" name="contact" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hidden-field"><label>Do not fill this out if you are human: <input name="bot-field"></label></p>
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        <label>Subject<select name="subject" required><option value="">Choose a subject</option><option>General question</option><option>Correction request</option><option>Project collaboration</option><option>Business enquiry</option><option>Privacy request</option></select></label>
+        <label>Message<textarea name="message" required minlength="10"></textarea></label>
+        <label class="consent-field"><input type="checkbox" name="consent" value="yes" required><span>I agree that REN Studio may use these details to respond to my message.</span></label>
+        <button type="submit">Send message</button>
+        <p class="contact-message" aria-live="polite">Please do not submit passwords or other sensitive information.</p>
+      </form>
+    </section>
+    <section class="policy-section">
+      <h2>Response and safety</h2>
+      <p>REN Studio cannot guarantee a response time. Never send passwords, payment-card information, private access keys, or other highly sensitive information through this form.</p>
+    </section>
+  </main>
+  <footer>
+    <div><a class="brand" href="index.html"><strong>REN</strong><span>STUDIO</span></a></div>
+    <nav class="legal-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="disclaimer.html">Disclaimer</a></nav>
+    <p>© <span data-year></span> REN Studio</p>
+  </footer>
+</body>
+</html>
