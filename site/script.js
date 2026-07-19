@@ -28,6 +28,43 @@ if (hero && portrait && !window.matchMedia("(prefers-reduced-motion: reduce)").m
 
 document.querySelectorAll("[data-year], #year").forEach(el => el.textContent = new Date().getFullYear());
 
+const newsletterForm = document.querySelector('form[name="newsletter"]');
+newsletterForm?.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!newsletterForm.reportValidity()) return;
+
+  const button = newsletterForm.querySelector('button[type="submit"]');
+  const status = newsletterForm.querySelector(".newsletter-status");
+  const formData = new FormData(newsletterForm);
+  const payload = {
+    email: String(formData.get("email") || "").trim(),
+    firstName: String(formData.get("first_name") || "").trim(),
+    consent: formData.get("marketing_consent") === "yes",
+    website: String(formData.get("bot-field") || "")
+  };
+
+  newsletterForm.classList.add("is-sending");
+  button.disabled = true;
+  status.classList.remove("is-error");
+  status.textContent = "Adding you to the studio…";
+
+  try {
+    const response = await fetch("/.netlify/functions/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.message || "Subscription failed");
+    window.location.assign("/subscribed/");
+  } catch (error) {
+    status.classList.add("is-error");
+    status.textContent = "We couldn’t add you right now. Please try again in a moment.";
+    newsletterForm.classList.remove("is-sending");
+    button.disabled = false;
+  }
+});
+
 if (!localStorage.getItem("ren_cookie_choice")) {
   const notice = document.createElement("aside");
   notice.className = "cookie-notice";
