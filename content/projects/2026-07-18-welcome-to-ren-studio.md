@@ -3,9 +3,10 @@ title: "Welcome to REN Studio"
 date: "2026-07-18T12:00:00Z"
 description: "A first look at the projects, technology and creative experiments REN Studio will explore."
 image: "/images/xiaoyu-hero-v3.png"
-category: "Projects"
 featured: true
-reading_time: "4 min"
+difficulty: "Beginner"
+build_time: "30 minutes"
+status: "Complete"
 ---
 
 REN Studio is a place for turning ideas into working things.
@@ -14,4 +15,4 @@ REN Studio is a place for turning ideas into working things.
 
 Expect practical technology projects, creator workflows, AI experiments, tutorials and honest reviews.
 
-This sample post proves that the CMS pipeline works. Replace it from the `/admin/` dashboard after deployment.
+This sample project proves that the CMS pipeline works. Replace it from the `/admin/` dashboard after deployment.

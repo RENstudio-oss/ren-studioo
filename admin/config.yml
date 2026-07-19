@@ -12,10 +12,10 @@ slug:
   clean_accents: true
 
 collections:
-  - name: posts
-    label: Posts
-    label_singular: Post
-    folder: content/posts
+  - name: stories
+    label: Stories
+    label_singular: Story
+    folder: content/stories
     create: true
     extension: md
     format: frontmatter
@@ -30,7 +30,36 @@ collections:
       - label: Category
         name: category
         widget: select
-        options: [Tech, Projects, AI, Creator, Tutorials, Reviews]
-      - { label: Featured, name: featured, widget: boolean, default: false, hint: "The newest featured post becomes the large homepage project." }
+        options: [Tech, AI, Creator, Tutorials, Reviews]
       - { label: Reading time, name: reading_time, widget: string, default: "6 min" }
-      - { label: Article, name: body, widget: markdown }
+      - { label: Story, name: body, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: content/projects
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{status}}"
+    sortable_fields: [date, title, status]
+    fields:
+      - { label: Project title, name: title, widget: string }
+      - { label: Publish date, name: date, widget: datetime, format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: Short description, name: description, widget: text }
+      - { label: Project image, name: image, widget: image, required: true }
+      - { label: Feature on homepage, name: featured, widget: boolean, default: false, hint: "The newest project with this enabled becomes the homepage feature." }
+      - label: Difficulty
+        name: difficulty
+        widget: select
+        options: [Beginner, Intermediate, Advanced]
+        default: Beginner
+      - { label: Estimated build time, name: build_time, widget: string, default: "1–2 hours" }
+      - label: Status
+        name: status
+        widget: select
+        options: [Planned, In progress, Complete]
+        default: Complete
+      - { label: Source code or download link, name: source_url, widget: string, required: false }
+      - { label: Project guide, name: body, widget: markdown }

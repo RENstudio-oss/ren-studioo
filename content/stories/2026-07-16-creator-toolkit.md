@@ -4,7 +4,6 @@ date: "2026-07-16T12:00:00Z"
 description: "A smaller collection of dependable tools can beat a folder full of subscriptions."
 image: "/images/project-rover-placeholder.svg"
 category: "Creator"
-featured: false
 reading_time: "6 min"
 ---
 
