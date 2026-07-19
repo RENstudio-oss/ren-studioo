@@ -53,6 +53,34 @@
       <a href="category/tech.html">Tech</a><a href="category/projects.html">Projects</a><a href="category/ai.html">AI</a>
       <a href="category/creator.html">Creator</a><a href="category/tutorials.html">Tutorials</a><a href="category/reviews.html">Reviews</a>
     </nav>
+
+    <section class="newsletter" id="subscribe" aria-labelledby="newsletter-title">
+      <div class="newsletter-intro">
+        <p class="label">The REN Dispatch</p>
+        <h2 id="newsletter-title">Join REN Studio.</h2>
+        <p>Get standout projects, useful tech stories, and creator resources delivered without the noise.</p>
+      </div>
+      <form class="newsletter-form" name="newsletter" method="POST" action="/subscribed/" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p class="form-trap" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="newsletter-fields">
+          <label>
+            <span>First name <small>optional</small></span>
+            <input type="text" name="first_name" autocomplete="given-name" placeholder="Xiaoyu">
+          </label>
+          <label>
+            <span>Email address</span>
+            <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+          <button type="submit">Join the studio <span aria-hidden="true">→</span></button>
+        </div>
+        <label class="newsletter-consent">
+          <input type="checkbox" name="marketing_consent" value="yes" required>
+          <span>I agree to receive REN Studio emails. I can unsubscribe anytime. See the <a href="privacy.html">Privacy Policy</a>.</span>
+        </label>
+        <p class="newsletter-note">No spam. Just new builds, clear ideas, and useful discoveries.</p>
+      </form>
+    </section>
   </main>
 
   <footer>
