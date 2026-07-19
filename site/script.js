@@ -65,14 +65,28 @@ newsletterForm?.addEventListener("submit", async event => {
   }
 });
 
-if (!localStorage.getItem("ren_cookie_choice")) {
-  const notice = document.createElement("aside");
-  notice.className = "cookie-notice";
-  notice.setAttribute("aria-label", "Cookie choices");
-  notice.innerHTML = `<div><strong>Your privacy matters.</strong><p>REN Studio currently uses only essential local storage to remember this choice. Advertising cookies remain disabled until a certified consent platform and AdSense are configured.</p><a href="cookies.html">Read cookie policy</a></div><div class="cookie-actions"><button data-choice="essential">Essential only</button><button data-choice="all">Accept all</button></div>`;
-  document.body.appendChild(notice);
-  notice.querySelectorAll("button").forEach(button => button.addEventListener("click", () => {
-    localStorage.setItem("ren_cookie_choice", button.dataset.choice);
-    notice.remove();
-  }));
+const legalLinks = document.querySelector("footer .legal-links");
+if (legalLinks && !document.querySelector("#privacy-choices")) {
+  const privacyChoices = document.createElement("a");
+  privacyChoices.id = "privacy-choices";
+  privacyChoices.href = "#";
+  privacyChoices.textContent = "Privacy choices";
+  privacyChoices.hidden = true;
+  legalLinks.appendChild(privacyChoices);
+
+  privacyChoices.addEventListener("click", event => {
+    event.preventDefault();
+    window.googlefc?.showRevocationMessage?.();
+  });
+
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.callbackQueue.push({
+    CONSENT_API_READY: () => {
+      if (typeof window.__tcfapi !== "function") return;
+      window.__tcfapi("addEventListener", 0, (tcData, success) => {
+        privacyChoices.hidden = !(success && tcData?.gdprApplies);
+      });
+    }
+  });
 }
