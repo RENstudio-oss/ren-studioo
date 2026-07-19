@@ -8,6 +8,7 @@ const STORIES = path.join(ROOT, "content", "stories");
 const PROJECTS = path.join(ROOT, "content", "projects");
 const LEGACY_POSTS = path.join(ROOT, "content", "posts");
 const CATEGORIES = ["Tech", "Projects", "AI", "Creator", "Tutorials", "Reviews"];
+const ADSENSE_CODE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9814495351652079" crossorigin="anonymous"></script>';
 
 const escapeHtml = (value = "") => String(value)
   .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
@@ -100,6 +101,21 @@ function storyRow(entry, number) {
   return `<a href="${entry.url}"><b>${String(number).padStart(2, "0")}</b><h3>${escapeHtml(entry.title)}</h3><span>${escapeHtml(meta)}</span><i>↗</i></a>`;
 }
 
+function addAdSenseCode(folder) {
+  for (const entry of fs.readdirSync(folder, { withFileTypes: true })) {
+    const fullPath = path.join(folder, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name !== "admin") addAdSenseCode(fullPath);
+      continue;
+    }
+    if (!entry.name.endsWith(".html")) continue;
+    const html = fs.readFileSync(fullPath, "utf8");
+    if (!html.includes("ca-pub-9814495351652079")) {
+      fs.writeFileSync(fullPath, html.replace("</head>", `${ADSENSE_CODE}</head>`));
+    }
+  }
+}
+
 function build() {
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.cpSync(SITE, OUT, { recursive: true });
@@ -140,6 +156,7 @@ function build() {
     const content = `<main class="category-page"><p class="label">Explore</p><h1>${escapeHtml(category)}.</h1><div class="story-list">${rows}</div></main>`;
     fs.writeFileSync(path.join(OUT, "category", `${category.toLowerCase()}.html`), pageShell(category, `${category} from REN Studio`, content));
   }
+  addAdSenseCode(OUT);
   console.log(`Built ${stories.length} stories, ${projects.length} projects and ${CATEGORIES.length} category pages into _site.`);
 }
 
